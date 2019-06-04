@@ -1,0 +1,61 @@
+Sub StockMarketAnalysis():
+
+Dim index1 As Long
+Dim Volume As Double
+Dim Ticker As String
+Dim NextTicker As String
+Dim TickerSumRow As Integer
+Dim LastRow As Long
+Dim ws As Worksheet
+Dim StartStockPrice as Double
+Dim EndStockPrice as Double
+Dim MaxPercent as Double
+Dim MinPercent as Double
+Set starting_ws = ActiveSheet
+
+
+For Each ws In ThisWorkbook.Worksheets
+ws.Activate
+
+    LastRow = Cells(Rows.Count, 1).End(xlUp).Row
+
+    Volume = 0
+    TickerSumRow = 2
+    Range ("I1").Value = "Ticker"
+    Range ("J1").Value = "Yearly Change"
+    Range ("K1").Value = "Percent Change"
+    Range ("L1").Value = "Total Stock Volume"
+
+    For index1 = 2 To LastRow
+
+        Ticker = Cells(index1, 1).Value
+        NextTicker = Cells(index1 + 1, 1).Value
+        StartStockPrice = Cells(index1,3).Value
+
+            If Ticker <> NextTicker Then
+                
+                EndStockPrice = Cells(index1, 6)
+                Volume = Volume + Cells(index1, 7).Value
+                Range("I" & TickerSumRow).Value = Ticker
+                Range("J"& TickerSumRow).Value = StartStockPrice - EndStockPrice
+                Range("K" & TickerSumRow).Value = (StartStockPrice - EndStockPrice)/StartStockPrice
+                Range("L" & TickerSumRow).Value = Volume
+                
+
+                TickerSumRow = TickerSumRow + 1
+                Volume = 0
+            Else
+
+                Volume = Volume + Cells(index1, 7).Value
+
+            End If
+
+    Next index1
+
+Next ws
+
+starting_ws.Activate
+
+End Sub
+
+

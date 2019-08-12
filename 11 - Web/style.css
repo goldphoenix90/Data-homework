@@ -1,0 +1,17 @@
+.col-md-5{
+    border-style: solid
+}
+
+.col-md-7{
+    border-style: solid
+
+}
+
+.resize{
+    width: 200px;
+    height: auto
+}
+
+.box{
+    padding: 0 5px 0 5px
+}

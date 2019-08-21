@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mars Data</h1>
+      
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Mars Data!</a></p>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="{{ mars_info.featured_image_url }}" alt="featured_img" class="featured">
+          
+        </div>
+        
+      </div>
+      <div class="row">
+          
+          <h2>Mars News</h2>
+          <h3>Title: {{ mars_info.news_title }}</h3>
+          <h3>Excerpt: {{ mars_info.news_p }}</h3>
+
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+          <div class="col-md-6">
+              <h4>
+                Mars Table of Facts
+              </h4>
+              <h4>{{ mars_info.mars_table|safe }}</h4>
+            </div>
+      </div>
+
+      <div class="row">
+          {% for hemisphere in mars_info.hemisphere_images %}
+          <div class="col-md-6">
+            <img src={{hemisphere.img_url}} class="img-responsive"/>
+            <h3>{{ hemisphere.title }}</h3>
+            <br/>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+</body>
+
+</html>
